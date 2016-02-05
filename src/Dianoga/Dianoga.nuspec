@@ -4,15 +4,15 @@
         <id>$id$</id>
         <version>$version$</version>
         <title>$title$</title>
-        <authors>Kam Figy</authors>
-        <owners>Kam Figy</owners>
+        <authors>Sergi Gisbert, Kam Figy</authors>
+        <owners>Sergi Gisbert, Kam Figy</owners>
         <licenseUrl>http://opensource.org/licenses/MIT</licenseUrl>
-        <projectUrl>http://github.com/kamsar/Dianoga</projectUrl>
+        <projectUrl>http://github.com/sgisbert/Dianoga</projectUrl>
         <requireLicenseAcceptance>false</requireLicenseAcceptance>
         <description>Automatic media library image file optimization for Sitecore</description>
         <releaseNotes>Initial release</releaseNotes>
-        <copyright>Copyright 2015</copyright>
-        <tags>sitecore optimization</tags>
+        <copyright>Copyright 2016</copyright>
+        <tags>kentico image optimization</tags>
     </metadata> 
     <files>
         <file src="Dianoga.config" target="content\App_Config\Include" />

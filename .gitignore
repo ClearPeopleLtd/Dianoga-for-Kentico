@@ -23,3 +23,5 @@ lib/sitecore/*
 packages/*
 !packages/repositories.config
 Build/*.nupkg
+lib/kentico/*
+!lib/kentico/readme.txt

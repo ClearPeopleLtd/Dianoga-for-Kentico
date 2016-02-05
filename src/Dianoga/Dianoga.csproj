@@ -9,8 +9,9 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Dianoga</RootNamespace>
     <AssemblyName>Dianoga</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -30,11 +31,20 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="nQuant.Core">
-      <HintPath>..\..\packages\nQuant.1.0.3\Lib\net40\nQuant.Core.dll</HintPath>
+    <Reference Include="CMS.Base">
+      <HintPath>..\..\lib\kentico\CMS.Base.dll</HintPath>
     </Reference>
-    <Reference Include="Sitecore.Kernel">
-      <HintPath>..\..\lib\sitecore\Sitecore.Kernel.dll</HintPath>
+    <Reference Include="CMS.Core">
+      <HintPath>..\..\lib\kentico\CMS.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="CMS.DataEngine">
+      <HintPath>..\..\lib\kentico\CMS.DataEngine.dll</HintPath>
+    </Reference>
+    <Reference Include="CMS.IO">
+      <HintPath>..\..\lib\kentico\CMS.IO.dll</HintPath>
+    </Reference>
+    <Reference Include="CMS.MediaLibrary">
+      <HintPath>..\..\lib\kentico\CMS.MediaLibrary.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
@@ -44,36 +54,48 @@
     <Reference Include="System.XML" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Config\DianogaConfig.cs" />
+    <Compile Include="Config\Optimizer.cs" />
+    <Compile Include="Config\Optimizers.cs" />
     <Compile Include="ExtensionBasedImageOptimizer.cs" />
     <Compile Include="IImageOptimizer.cs" />
+    <Compile Include="Init.cs" />
     <Compile Include="IOptimizerResult.cs" />
     <Compile Include="Jpeg\JpegOptimizer.cs" />
     <Compile Include="Jpeg\JpegOptimizerResult.cs" />
-    <Compile Include="Pipelines\Initialize\MediaCacheReplacer.cs" />
     <Compile Include="MediaOptimizer.cs" />
-    <Compile Include="OptimizingMediaCache.cs" />
-    <Compile Include="Png\PngQuantOptimizerResult.cs" />
     <Compile Include="Png\PngOptimizer.cs" />
     <Compile Include="Png\PngOptimizerResult.cs" />
-    <Compile Include="Png\PngQuantOptimizer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Dianoga Tools\libjpeg\jpeg62.dll" />
-    <Content Include="Dianoga Tools\libjpeg\jpegtran.exe" />
-    <Content Include="Dianoga Tools\libjpeg\license.txt" />
+    <Content Include="Dianoga Tools\libjpeg\jpeg62.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Dianoga Tools\libjpeg\jpegtran.exe">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Dianoga Tools\libjpeg\license.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Dianoga Tools\PNGOptimizer\License.txt" />
-    <Content Include="Dianoga Tools\PNGOptimizer\PngOptimizerDll.dll" />
-    <Content Include="Dianoga Tools\PNGOptimizer\PngOptimizerDll.h" />
+    <Content Include="Dianoga Tools\PNGOptimizer\PngOptimizerDll.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Dianoga Tools\PNGOptimizer\PngOptimizerDll.h">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <None Include="Dianoga.config">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Dianoga Tools\PNGOptimizer\PngOptimizerDll.lib" />
+    <None Include="Dianoga Tools\PNGOptimizer\PngOptimizerDll.lib">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="Dianoga.nuspec" />
-    <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

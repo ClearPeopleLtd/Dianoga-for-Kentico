@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Linq;
-using Sitecore.Resources.Media;
+using CMS.MediaLibrary;
 
 namespace Dianoga
 {
@@ -11,11 +11,11 @@ namespace Dianoga
 	{
 		protected abstract string[] SupportedExtensions { get; }
 
-		public virtual bool CanOptimize(MediaStream stream)
+		public virtual bool CanOptimize(MediaFileInfo stream)
 		{
-			return SupportedExtensions.Any(ext => ext.Equals(stream.Extension, StringComparison.OrdinalIgnoreCase));
+			return SupportedExtensions.Any(ext => ext.Equals(stream.FileExtension, StringComparison.OrdinalIgnoreCase));
 		}
 
-		public abstract IOptimizerResult Optimize(MediaStream stream);
+		public abstract IOptimizerResult Optimize(MediaFileInfo stream);
 	}
 }

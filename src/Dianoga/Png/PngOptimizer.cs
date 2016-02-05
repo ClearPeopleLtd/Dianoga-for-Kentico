@@ -3,7 +3,7 @@ using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Web.Hosting;
-using Sitecore.Resources.Media;
+using CMS.MediaLibrary;
 
 namespace Dianoga.Png
 {
@@ -14,7 +14,7 @@ namespace Dianoga.Png
 
 		private string _pathToDll;
 
-		public string DllPath
+		public string Path
 		{
 			get { return _pathToDll; }
 			set
@@ -26,48 +26,41 @@ namespace Dianoga.Png
 
 		protected override string[] SupportedExtensions
 		{
-			get { return new[] { "png" }; }
+			get { return new[] { ".png" }; }
 		}
 
-		public override IOptimizerResult Optimize(MediaStream stream)
+		public override IOptimizerResult Optimize(MediaFileInfo file)
 		{
-			IntPtr pngOptimizer = GetOrLoadPngOptimizer();
+            IntPtr pngOptimizer = GetOrLoadPngOptimizer();
 
-			using (var memoryStream = new MemoryStream())
-			{
-				stream.Stream.CopyTo(memoryStream);
-				byte[] imageBytes = memoryStream.ToArray();
-				byte[] resultBytes = new byte[imageBytes.Length + 400000];
-				int resultSize;
+            byte[] imageBytes = file.FileBinary;
+            byte[] resultBytes = new byte[imageBytes.Length + 400000];
+            int resultSize;
 
-				IntPtr addressOfOptimize = NativeMethods.GetProcAddress(pngOptimizer, "PO_OptimizeFileMem");
+            IntPtr addressOfOptimize = NativeMethods.GetProcAddress(pngOptimizer, "PO_OptimizeFileMem");
 
-				if (addressOfOptimize == IntPtr.Zero) throw new Exception("Can't find optimize funtion in PngOptimizerDll.dll!");
+            if (addressOfOptimize == IntPtr.Zero) throw new Exception("Can't find optimize funtion in PngOptimizerDll.dll!");
 
-				OptimizeBytes optimizeMethod = (OptimizeBytes)Marshal.GetDelegateForFunctionPointer(addressOfOptimize, typeof(OptimizeBytes));
+            OptimizeBytes optimizeMethod = (OptimizeBytes)Marshal.GetDelegateForFunctionPointer(addressOfOptimize, typeof(OptimizeBytes));
+            bool success = optimizeMethod(imageBytes, imageBytes.Length, resultBytes, resultBytes.Length, out resultSize);
 
-				bool success = optimizeMethod(imageBytes, imageBytes.Length, resultBytes, resultBytes.Length, out resultSize);
+            var result = new PngOptimizerResult();
+            result.Success = success;
+            result.SizeBefore = imageBytes.Length;
+            result.SizeAfter = resultSize;
+            result.OptimizedBytes = resultBytes.Take(resultSize).ToArray();
 
-				var result = new PngOptimizerResult();
-				result.Success = success;
-				result.SizeBefore = imageBytes.Length;
-				result.SizeAfter = resultSize;
-				result.OptimizedBytes = resultBytes.Take(resultSize).ToArray();
+            if (!result.Success)
+            {
+                IntPtr addressOfGetError = NativeMethods.GetProcAddress(pngOptimizer, "PO_GetLastErrorString");
+                if (addressOfGetError == IntPtr.Zero) throw new Exception("Can't find get last error funtion in PngOptimizerDll.dll!");
 
-				if (!result.Success)
-				{
-					IntPtr addressOfGetError = NativeMethods.GetProcAddress(pngOptimizer, "PO_GetLastErrorString");
+                GetLastErrorString errorMethod = (GetLastErrorString)Marshal.GetDelegateForFunctionPointer(addressOfGetError, typeof(GetLastErrorString));
+                result.ErrorMessage = errorMethod();
+            }
 
-					if (addressOfGetError == IntPtr.Zero) throw new Exception("Can't find get last error funtion in PngOptimizerDll.dll!");
-
-					GetLastErrorString errorMethod = (GetLastErrorString)Marshal.GetDelegateForFunctionPointer(addressOfGetError, typeof(GetLastErrorString));
-
-					result.ErrorMessage = errorMethod();
-				}
-
-				return result;
-			}
-		}
+            return result;
+        }
 
 		private IntPtr _pngo;
 		protected virtual IntPtr GetOrLoadPngOptimizer()
@@ -78,15 +71,15 @@ namespace Dianoga.Png
 			{
 				if (_pngo != IntPtr.Zero) return _pngo;
 
-				if (!File.Exists(DllPath)) throw new FileNotFoundException("Unable to load PngOptimizerDll.dll from " + DllPath);
+				if (!File.Exists(Path)) throw new FileNotFoundException("Unable to load PngOptimizerDll.dll from " + Path);
 
-				var tempPath = Path.GetTempFileName();
+				var tempPath = System.IO.Path.GetTempFileName();
 
-				File.Copy(DllPath, tempPath, true);
+                File.Copy(Path, tempPath, true);
 
 				_pngo = NativeMethods.LoadLibrary(tempPath);
 
-				if (_pngo == IntPtr.Zero) throw new Exception("Unable to load PNGOptimizer from " + DllPath);
+				if (_pngo == IntPtr.Zero) throw new Exception("Unable to load PNGOptimizer from " + Path);
 
 				return _pngo;
 			}

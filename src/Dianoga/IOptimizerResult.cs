@@ -8,7 +8,7 @@ namespace Dianoga
 		string ErrorMessage { get; }
 		int SizeBefore { get; }
 		int SizeAfter { get; }
+        byte[] OptimizedBytes { get; set; }
 
-		Stream CreateResultStream();
-	}
+    }
 }

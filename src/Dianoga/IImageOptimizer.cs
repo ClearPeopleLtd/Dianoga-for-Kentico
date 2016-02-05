@@ -1,10 +1,10 @@
-﻿using Sitecore.Resources.Media;
+﻿using CMS.MediaLibrary;
 
 namespace Dianoga
 {
 	public interface IImageOptimizer
 	{
-		bool CanOptimize(MediaStream stream);
-		IOptimizerResult Optimize(MediaStream stream);
+		bool CanOptimize(MediaFileInfo stream);
+		IOptimizerResult Optimize(MediaFileInfo stream);
 	}
 }
