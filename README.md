@@ -30,6 +30,7 @@ To perform a manual installation:
 
 * Copy the Dianoga Tools folder to the root of your website
 * Add web.config section:
+```html
 	<configSections>
 		<section name="dianoga" type="Dianoga.Config.DianogaSection" />
 	</configSections>
@@ -39,6 +40,7 @@ To perform a manual installation:
       		<add type="Dianoga.Jpeg.JpegOptimizer, Dianoga" path="~/Dianoga Tools/libjpeg/jpegtran.exe"/>
 		</optimizers>
 	</dianoga>
+```
 * Reference Dianoga.dll or the source project in your web project
 
 ## Troubleshooting
