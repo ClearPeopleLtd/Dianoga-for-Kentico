@@ -4,12 +4,12 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{FD53D6C4-00CC-4CD0-8B18-98D0DD97C289}</ProjectGuid>
+    <ProjectGuid>{54E9BB9B-5503-459E-A935-A83284B8DE24}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Dianoga</RootNamespace>
     <AssemblyName>Dianoga</AssemblyName>
-    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
   </PropertyGroup>
@@ -18,7 +18,7 @@
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>TRACE;DEBUG;NET46</DefineConstants>
+    <DefineConstants>TRACE;DEBUG;NET4</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
@@ -31,26 +31,33 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="CMS.Base">
-      <HintPath>..\..\lib\kentico\CMS.Base.dll</HintPath>
+    <Reference Include="CMS.Base, Version=9.0.0.0, Culture=neutral, PublicKeyToken=834b12a258f213f9, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\lib\kentico_8.2\CMS.Base.dll</HintPath>
     </Reference>
-    <Reference Include="CMS.Core">
-      <HintPath>..\..\lib\kentico\CMS.Core.dll</HintPath>
+    <Reference Include="CMS.Core, Version=9.0.0.0, Culture=neutral, PublicKeyToken=834b12a258f213f9, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\lib\kentico_8.2\CMS.Core.dll</HintPath>
     </Reference>
-    <Reference Include="CMS.DataEngine">
-      <HintPath>..\..\lib\kentico\CMS.DataEngine.dll</HintPath>
+    <Reference Include="CMS.DataEngine, Version=9.0.0.0, Culture=neutral, PublicKeyToken=834b12a258f213f9, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\lib\kentico_8.2\CMS.DataEngine.dll</HintPath>
     </Reference>
-    <Reference Include="CMS.EventLog">
-      <HintPath>..\..\lib\kentico\CMS.EventLog.dll</HintPath>
+    <Reference Include="CMS.EventLog, Version=9.0.0.0, Culture=neutral, PublicKeyToken=834b12a258f213f9, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\lib\kentico_8.2\CMS.EventLog.dll</HintPath>
     </Reference>
-    <Reference Include="CMS.IO">
-      <HintPath>..\..\lib\kentico\CMS.IO.dll</HintPath>
+    <Reference Include="CMS.IO, Version=9.0.0.0, Culture=neutral, PublicKeyToken=834b12a258f213f9, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\lib\kentico_8.2\CMS.IO.dll</HintPath>
     </Reference>
-    <Reference Include="CMS.MediaLibrary">
-      <HintPath>..\..\lib\kentico\CMS.MediaLibrary.dll</HintPath>
+    <Reference Include="CMS.MediaLibrary, Version=9.0.0.0, Culture=neutral, PublicKeyToken=834b12a258f213f9, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\lib\kentico_8.2\CMS.MediaLibrary.dll</HintPath>
     </Reference>
-    <Reference Include="CMS.SiteProvider">
-      <HintPath>..\..\lib\kentico\CMS.SiteProvider.dll</HintPath>
+    <Reference Include="CMS.SiteProvider, Version=9.0.0.0, Culture=neutral, PublicKeyToken=834b12a258f213f9, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\lib\kentico_8.2\CMS.SiteProvider.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
@@ -93,13 +100,13 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Dianoga_8.2.nuspec" />
     <None Include="Dianoga.config">
       <SubType>Designer</SubType>
     </None>
     <None Include="Dianoga Tools\PNGOptimizer\PngOptimizerDll.lib">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Dianoga.nuspec" />
     <None Include="web.config.transform" />
   </ItemGroup>
   <ItemGroup />

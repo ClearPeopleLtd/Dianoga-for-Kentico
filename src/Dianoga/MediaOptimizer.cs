@@ -7,16 +7,17 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Reflection;
 using System.Xml;
 
 namespace Dianoga
 {
-	public class MediaOptimizer
-	{
-		protected static readonly IImageOptimizer[] Optimizers;
+    public class MediaOptimizer
+    {
+        protected static readonly IImageOptimizer[] Optimizers;
 
-		static MediaOptimizer()
-		{
+        static MediaOptimizer()
+        {
             var config = DianogaConfig.GetOptimizers().OfType<OptimizerElement>();
 
             List<IImageOptimizer> optimizers = new List<IImageOptimizer>();
@@ -33,7 +34,7 @@ namespace Dianoga
                         var path = instanceType.GetProperty("Path");
                         if (path != null)
                         {
-                            path.SetValue(optimizer, item.Path);
+                            path.SetValue(optimizer, item.Path, null);
                         }
                         optimizers.Add((IImageOptimizer)optimizer);
                     }
@@ -41,7 +42,7 @@ namespace Dianoga
             }
 
             Optimizers = optimizers.ToArray();
-		}
+        }
 
         public void MediaFile_Insert_Before(object sender, ObjectEventArgs e)
         {
@@ -65,43 +66,43 @@ namespace Dianoga
         /// Optimizes a media stream and returns the optimized result. The original stream is closed if processing is successful.
         /// </summary>
         public virtual IOptimizerResult Process(MediaFileInfo stream)
-		{
-			var optimizer = CreateOptimizer(stream);
+        {
+            var optimizer = CreateOptimizer(stream);
 
-			if (optimizer == null) return null;
+            if (optimizer == null) return null;
 
-			var sw = new Stopwatch();
-			sw.Start();
-			var result = optimizer.Optimize(stream);
-			sw.Stop();
+            var sw = new Stopwatch();
+            sw.Start();
+            var result = optimizer.Optimize(stream);
+            sw.Stop();
 
-			if (result.Success)
-			{
-                EventLogProvider.LogInformation("Dianoga.Kentico", "IMAGE_OPTIMIZED", String.Format("Dianoga: optimized {0}.{1} [{2}x{3}] (final size: {4} bytes) - saved {5} bytes / {6:p}. Optimized in {7}ms.", 
-                                                    stream.FileName, 
-                                                    stream.FileExtension, 
+            if (result.Success)
+            {
+                EventLogProvider.LogInformation("Dianoga.Kentico", "IMAGE_OPTIMIZED", String.Format("Dianoga: optimized {0}.{1} [{2}x{3}] (final size: {4} bytes) - saved {5} bytes / {6:p}. Optimized in {7}ms.",
+                                                    stream.FileName,
+                                                    stream.FileExtension,
                                                     stream.FileImageWidth,
                                                     stream.FileImageHeight,
-                                                    result.SizeAfter, 
+                                                    result.SizeAfter,
                                                     result.SizeBefore - result.SizeAfter,
-                                                    1 - ((result.SizeAfter / (float)result.SizeBefore)), 
+                                                    1 - ((result.SizeAfter / (float)result.SizeBefore)),
                                                     sw.ElapsedMilliseconds));
 
                 return result;
-			}
+            }
             EventLogProvider.LogWarning("Dianoga.Kentico", "IMAGE_OPT_ERR", new Exception(String.Format("Dianoga: unable to optimize {0} because {1}", stream.FileName, result.ErrorMessage)), SiteContext.CurrentSiteID, "Dianoga Error");
 
-			return null;
-		}
+            return null;
+        }
 
-		public virtual bool CanOptimize(MediaFileInfo stream)
-		{
-			return CreateOptimizer(stream) != null;
-		}
+        public virtual bool CanOptimize(MediaFileInfo stream)
+        {
+            return CreateOptimizer(stream) != null;
+        }
 
-		protected virtual IImageOptimizer CreateOptimizer(MediaFileInfo stream)
-		{
-			return Optimizers.FirstOrDefault(optimizer => optimizer.CanOptimize(stream));
-		}
-	}
+        protected virtual IImageOptimizer CreateOptimizer(MediaFileInfo stream)
+        {
+            return Optimizers.FirstOrDefault(optimizer => optimizer.CanOptimize(stream));
+        }
+    }
 }
