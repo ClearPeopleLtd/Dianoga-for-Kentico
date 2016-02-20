@@ -25,3 +25,5 @@ packages/*
 Build/*.nupkg
 lib/kentico/*
 !lib/kentico/readme.txt
+lib/kentico_8.2/*
+!lib/kentico_8.2/readme.txt
