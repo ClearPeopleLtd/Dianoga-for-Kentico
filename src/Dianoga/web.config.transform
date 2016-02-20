@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<configuration>
+  <configSections>
+    <section name="dianoga" type="Dianoga.Config.DianogaSection" />
+  </configSections>
+  <dianoga>
+    <optimizers>
+      <add type="Dianoga.Png.PngOptimizer, Dianoga" path="~/Dianoga Tools/PNGOptimizer/PNGOptimizerDll.dll" />
+      <add type="Dianoga.Jpeg.JpegOptimizer, Dianoga" path="~/Dianoga Tools/libjpeg/jpegtran.exe"/>
+    </optimizers>
+  </dianoga>
+</configuration>
