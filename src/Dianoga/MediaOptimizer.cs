@@ -77,7 +77,6 @@ namespace Dianoga
 
 			if (result.Success)
 			{
-                //Log.Info("Dianoga: optimized {0}.{1} [{2}] (final size: {3} bytes) - saved {4} bytes / {5:p}. Optimized in {6}ms.".FormatWith(stream.MediaItem.MediaPath, stream.MediaItem.Extension, GetDimensions(options), result.SizeAfter, result.SizeBefore - result.SizeAfter, 1 - ((result.SizeAfter / (float)result.SizeBefore)), sw.ElapsedMilliseconds), this);
                 EventLogProvider.LogInformation("Dianoga.Kentico", "IMAGE_OPTIMIZER", String.Format("Dianoga: optimized {0}.{1} [{2}x{3}] (final size: {4} bytes) - saved {5} bytes / {6:p}. Optimized in {7}ms.", 
                                                     stream.FileName, 
                                                     stream.FileExtension, 
@@ -91,7 +90,6 @@ namespace Dianoga
                 return result;
 			}
             EventLogProvider.LogWarning("Dianoga.Kentico", "IMAGE_OPTIMIZER", new Exception(String.Format("Dianoga: unable to optimize {0} because {1}", stream.FileName, result.ErrorMessage)), SiteContext.CurrentSiteID, "Dianoga Error");
-			//Log.Error("Dianoga: unable to optimize {0} because {1}".FormatWith(stream.MediaItem.Name, result.ErrorMessage), this);
 
 			return null;
 		}
