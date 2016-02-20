@@ -1,5 +1,6 @@
 ﻿using CMS;
 using CMS.DataEngine;
+using CMS.EventLog;
 using CMS.MediaLibrary;
 using Dianoga;
 
@@ -25,6 +26,7 @@ namespace Dianoga
 
             MediaFileInfo.TYPEINFO.Events.Insert.Before += MediaFile_Insert_Before;
             MediaFileInfo.TYPEINFO.Events.Update.Before += MediaFile_Insert_Before;
+            EventLogProvider.LogInformation("Dianoga.Kentico", "STARTAPP", "Dianoga module loaded");
         }
 
         private void MediaFile_Insert_Before(object sender, ObjectEventArgs e)

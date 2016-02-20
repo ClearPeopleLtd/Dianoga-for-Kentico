@@ -5,3 +5,5 @@ CMS.Core
 CMS.DataEngine
 CMS.IO
 CMS.MediaLibrary
+CMS.EventLog
+CMS.SiteProvider

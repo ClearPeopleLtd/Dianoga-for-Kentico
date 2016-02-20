@@ -40,11 +40,17 @@
     <Reference Include="CMS.DataEngine">
       <HintPath>..\..\lib\kentico\CMS.DataEngine.dll</HintPath>
     </Reference>
+    <Reference Include="CMS.EventLog">
+      <HintPath>..\..\lib\kentico\CMS.EventLog.dll</HintPath>
+    </Reference>
     <Reference Include="CMS.IO">
       <HintPath>..\..\lib\kentico\CMS.IO.dll</HintPath>
     </Reference>
     <Reference Include="CMS.MediaLibrary">
       <HintPath>..\..\lib\kentico\CMS.MediaLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="CMS.SiteProvider">
+      <HintPath>..\..\lib\kentico\CMS.SiteProvider.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
