@@ -44,22 +44,25 @@ namespace Dianoga.Png
             OptimizeBytes optimizeMethod = (OptimizeBytes)Marshal.GetDelegateForFunctionPointer(addressOfOptimize, typeof(OptimizeBytes));
             bool success = optimizeMethod(imageBytes, imageBytes.Length, resultBytes, resultBytes.Length, out resultSize);
 
-            var result = new PngOptimizerResult();
-            result.Success = success;
-            result.SizeBefore = imageBytes.Length;
-            result.SizeAfter = resultSize;
-            result.OptimizedBytes = resultBytes.Take(resultSize).ToArray();
+		    var result = new PngOptimizerResult
+		    {
+		        Success = success,
+		        SizeBefore = imageBytes.Length,
+		        SizeAfter = resultSize,
+		    };
 
-            if (!result.Success)
-            {
-                IntPtr addressOfGetError = NativeMethods.GetProcAddress(pngOptimizer, "PO_GetLastErrorString");
-                if (addressOfGetError == IntPtr.Zero) throw new Exception("Can't find get last error funtion in PngOptimizerDll.dll!");
+		    if (result.SizeBefore > result.SizeAfter)
+		        result.OptimizedBytes = resultBytes.Take(resultSize).ToArray();
 
-                GetLastErrorString errorMethod = (GetLastErrorString)Marshal.GetDelegateForFunctionPointer(addressOfGetError, typeof(GetLastErrorString));
-                result.ErrorMessage = errorMethod();
-            }
+		    if (result.Success) return result;
 
-            return result;
+		    IntPtr addressOfGetError = NativeMethods.GetProcAddress(pngOptimizer, "PO_GetLastErrorString");
+		    if (addressOfGetError == IntPtr.Zero) throw new Exception("Can't find get last error funtion in PngOptimizerDll.dll!");
+
+		    GetLastErrorString errorMethod = (GetLastErrorString)Marshal.GetDelegateForFunctionPointer(addressOfGetError, typeof(GetLastErrorString));
+		    result.ErrorMessage = errorMethod();
+
+		    return result;
         }
 
 		private IntPtr _pngo;

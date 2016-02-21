@@ -36,9 +36,10 @@ namespace Dianoga.Jpeg
                 stream.CopyTo(fileStream);
             }
 
-            var result = new JpegOptimizerResult();
-
-            result.SizeBefore = (int)stream.Length;
+            var result = new JpegOptimizerResult
+            {
+                SizeBefore = (int)stream.Length
+            };
 
             var jpegtran = Process.Start(Path, string.Format("-optimize -copy none -progressive -outfile \"{0}\" \"{0}\"", tempFilePath));
             if (jpegtran != null && jpegtran.WaitForExit(ToolTimeout))
@@ -53,13 +54,15 @@ namespace Dianoga.Jpeg
                 result.Success = true;
                 result.SizeAfter = (int)new FileInfo(tempFilePath).Length;
 
-                // read the file to memory so we can nuke the temp file
-                using (var fileStream = File.OpenRead(tempFilePath))
+                if (result.SizeBefore > result.SizeAfter)
                 {
-                    result.OptimizedBytes = new byte[fileStream.Length];
-                    fileStream.Read(result.OptimizedBytes, 0, result.OptimizedBytes.Length);
+                    // read the file to memory so we can nuke the temp file
+                    using (var fileStream = File.OpenRead(tempFilePath))
+                    {
+                        result.OptimizedBytes = new byte[fileStream.Length];
+                        fileStream.Read(result.OptimizedBytes, 0, result.OptimizedBytes.Length);
+                    }
                 }
-
                 File.Delete(tempFilePath);
 
                 return result;

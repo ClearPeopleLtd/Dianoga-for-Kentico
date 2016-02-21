@@ -36,7 +36,7 @@ namespace Dianoga
                 var image = (MediaFileInfo)e.Object;
                 IOptimizerResult result = _optimizer.Process(image);
 
-                if (result != null)
+                if (result != null && result.SizeAfter < result.SizeBefore)
                 {
                     image.FileBinary = result.OptimizedBytes;
                     image.FileSize = result.OptimizedBytes.Length;
