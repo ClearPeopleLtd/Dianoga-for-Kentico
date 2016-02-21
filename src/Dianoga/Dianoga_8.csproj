@@ -100,7 +100,7 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Dianoga_8.2.nuspec" />
+    <None Include="Dianoga_8.nuspec" />
     <None Include="Dianoga Tools\PNGOptimizer\PngOptimizerDll.lib">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
 VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dianoga", "src\Dianoga\Dianoga.csproj", "{FD53D6C4-00CC-4CD0-8B18-98D0DD97C289}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dianoga_9", "src\Dianoga\Dianoga_9.csproj", "{FD53D6C4-00CC-4CD0-8B18-98D0DD97C289}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dianoga_8.2", "src\Dianoga\Dianoga_8.2.csproj", "{54E9BB9B-5503-459E-A935-A83284B8DE24}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dianoga_8", "src\Dianoga\Dianoga_8.csproj", "{54E9BB9B-5503-459E-A935-A83284B8DE24}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

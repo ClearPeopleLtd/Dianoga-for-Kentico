@@ -31,31 +31,31 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="CMS.Base, Version=8.0.0.0, Culture=neutral, PublicKeyToken=834b12a258f213f9, processorArchitecture=MSIL">
+    <Reference Include="CMS.Base, Version=9.0.0.0, Culture=neutral, PublicKeyToken=834b12a258f213f9, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\lib\kentico\CMS.Base.dll</HintPath>
     </Reference>
-    <Reference Include="CMS.Core, Version=8.0.0.0, Culture=neutral, PublicKeyToken=834b12a258f213f9, processorArchitecture=MSIL">
+    <Reference Include="CMS.Core, Version=9.0.0.0, Culture=neutral, PublicKeyToken=834b12a258f213f9, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\lib\kentico\CMS.Core.dll</HintPath>
     </Reference>
-    <Reference Include="CMS.DataEngine, Version=8.0.0.0, Culture=neutral, PublicKeyToken=834b12a258f213f9, processorArchitecture=MSIL">
+    <Reference Include="CMS.DataEngine, Version=9.0.0.0, Culture=neutral, PublicKeyToken=834b12a258f213f9, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\lib\kentico\CMS.DataEngine.dll</HintPath>
     </Reference>
-    <Reference Include="CMS.EventLog, Version=8.0.0.0, Culture=neutral, PublicKeyToken=834b12a258f213f9, processorArchitecture=MSIL">
+    <Reference Include="CMS.EventLog, Version=9.0.0.0, Culture=neutral, PublicKeyToken=834b12a258f213f9, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\lib\kentico\CMS.EventLog.dll</HintPath>
     </Reference>
-    <Reference Include="CMS.IO, Version=8.0.0.0, Culture=neutral, PublicKeyToken=834b12a258f213f9, processorArchitecture=MSIL">
+    <Reference Include="CMS.IO, Version=9.0.0.0, Culture=neutral, PublicKeyToken=834b12a258f213f9, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\lib\kentico\CMS.IO.dll</HintPath>
     </Reference>
-    <Reference Include="CMS.MediaLibrary, Version=8.0.0.0, Culture=neutral, PublicKeyToken=834b12a258f213f9, processorArchitecture=MSIL">
+    <Reference Include="CMS.MediaLibrary, Version=9.0.0.0, Culture=neutral, PublicKeyToken=834b12a258f213f9, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\lib\kentico\CMS.MediaLibrary.dll</HintPath>
     </Reference>
-    <Reference Include="CMS.SiteProvider, Version=8.0.0.0, Culture=neutral, PublicKeyToken=834b12a258f213f9, processorArchitecture=MSIL">
+    <Reference Include="CMS.SiteProvider, Version=9.0.0.0, Culture=neutral, PublicKeyToken=834b12a258f213f9, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\lib\kentico\CMS.SiteProvider.dll</HintPath>
     </Reference>
@@ -103,7 +103,7 @@
     <None Include="Dianoga Tools\PNGOptimizer\PngOptimizerDll.lib">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Dianoga.nuspec" />
+    <None Include="Dianoga_9.nuspec" />
     <None Include="web.config.transform" />
   </ItemGroup>
   <ItemGroup />

@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <package>
     <metadata>
-        <id>$id$.Kentico</id>
+        <id>$id$.Kentico_9</id>
         <version>$version$</version>
         <title>$title$ for Kentico</title>
         <authors>Sergi Gisbert, Kam Figy</authors>
