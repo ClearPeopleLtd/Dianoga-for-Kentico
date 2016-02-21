@@ -6,7 +6,7 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("Dianoga")]
-[assembly: AssemblyDescription("Automatic media library image file optimization for Sitecore")]
+[assembly: AssemblyDescription("Automatic media library image file optimization for Kentico")]
 [assembly: AssemblyDiscoverable]
 
 // Setting ComVisible to false makes the types in this assembly not visible 
