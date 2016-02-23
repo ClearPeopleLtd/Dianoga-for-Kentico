@@ -28,9 +28,18 @@ namespace Dianoga.Jpeg
 
         public override IOptimizerResult Optimize(MediaFileInfo file)
         {
+            if(file.FileBinary == null)
+            {
+                return new JpegOptimizerResult
+                {
+                    SizeBefore = 0,
+                    SizeAfter = 0,
+                    Success = true
+                };
+            }
+            var stream = new MemoryStream(file.FileBinary);
             var tempFilePath = GetTempFilePath();
 
-            var stream = new MemoryStream(file.FileBinary);
             using (var fileStream = File.OpenWrite(tempFilePath))
             {
                 stream.CopyTo(fileStream);

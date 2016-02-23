@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <package>
     <metadata>
-        <id>$id$.Kentico_9</id>
+        <id>Dianoga.Kentico_9</id>
         <version>$version$</version>
         <title>$title$ for Kentico 9</title>
         <authors>Sergi Gisbert, Kam Figy</authors>
@@ -10,7 +10,7 @@
         <projectUrl>http://github.com/sgisbert/Dianoga</projectUrl>
         <requireLicenseAcceptance>false</requireLicenseAcceptance>
         <description>Automatic media library image file optimization for Kentico 9 (.Net 4.6)</description>
-        <releaseNotes>Initial release</releaseNotes>
+        <releaseNotes>Fixed issue when staging media files to Azure blob storage</releaseNotes>
         <copyright>Copyright 2016</copyright>
         <tags>kentico image optimization</tags>
     </metadata> 

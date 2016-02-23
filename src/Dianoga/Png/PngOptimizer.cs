@@ -31,6 +31,15 @@ namespace Dianoga.Png
 
 		public override IOptimizerResult Optimize(MediaFileInfo file)
 		{
+            if (file.FileBinary == null)
+            {
+                return new PngOptimizerResult
+                {
+                    SizeBefore = 0,
+                    SizeAfter = 0,
+                    Success = true
+                };
+            }
             IntPtr pngOptimizer = GetOrLoadPngOptimizer();
 
             byte[] imageBytes = file.FileBinary;
