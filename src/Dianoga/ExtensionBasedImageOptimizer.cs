@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using CMS.DocumentEngine;
 using CMS.MediaLibrary;
 
 namespace Dianoga
@@ -16,6 +17,13 @@ namespace Dianoga
 			return SupportedExtensions.Any(ext => ext.Equals(stream.FileExtension, StringComparison.OrdinalIgnoreCase));
 		}
 
-		public abstract IOptimizerResult Optimize(MediaFileInfo stream);
+        public virtual bool CanOptimize(AttachmentInfo stream)
+        {
+            return SupportedExtensions.Any(ext => ext.Equals(stream.AttachmentExtension, StringComparison.OrdinalIgnoreCase));
+        }
+
+        public abstract IOptimizerResult Optimize(MediaFileInfo stream);
+
+        public abstract IOptimizerResult Optimize(AttachmentInfo stream);
 	}
 }

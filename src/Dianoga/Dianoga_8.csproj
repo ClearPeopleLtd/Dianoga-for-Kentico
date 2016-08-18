@@ -61,6 +61,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\lib\kentico_8.2\CMS.DataEngine.dll</HintPath>
     </Reference>
+    <Reference Include="CMS.DocumentEngine">
+      <HintPath>..\..\lib\kentico_8.2\CMS.DocumentEngine.dll</HintPath>
+    </Reference>
     <Reference Include="CMS.EventLog, Version=9.0.0.0, Culture=neutral, PublicKeyToken=834b12a258f213f9, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\lib\kentico_8.2\CMS.EventLog.dll</HintPath>

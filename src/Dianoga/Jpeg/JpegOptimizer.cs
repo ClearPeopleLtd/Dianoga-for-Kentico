@@ -1,6 +1,7 @@
 ﻿using System.Diagnostics;
 using System.IO;
 using System.Web.Hosting;
+using CMS.DocumentEngine;
 using CMS.MediaLibrary;
 
 namespace Dianoga.Jpeg
@@ -28,7 +29,17 @@ namespace Dianoga.Jpeg
 
         public override IOptimizerResult Optimize(MediaFileInfo file)
         {
-            if(file.FileBinary == null)
+            return ProcessStream(file.FileBinary);
+        }
+
+        public override IOptimizerResult Optimize(AttachmentInfo file)
+        {
+            return ProcessStream(file.AttachmentBinary);
+        }
+
+        private IOptimizerResult ProcessStream(byte[] imageBytes)
+        {
+            if (imageBytes == null)
             {
                 return new JpegOptimizerResult
                 {
@@ -37,7 +48,8 @@ namespace Dianoga.Jpeg
                     Success = true
                 };
             }
-            var stream = new MemoryStream(file.FileBinary);
+            var stream = new MemoryStream(imageBytes);
+
             var tempFilePath = GetTempFilePath();
 
             using (var fileStream = File.OpenWrite(tempFilePath))
@@ -82,6 +94,8 @@ namespace Dianoga.Jpeg
 
             return result;
         }
+
+        
 
         protected virtual string GetTempFilePath()
         {

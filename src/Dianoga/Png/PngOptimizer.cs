@@ -3,6 +3,7 @@ using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Web.Hosting;
+using CMS.DocumentEngine;
 using CMS.MediaLibrary;
 
 namespace Dianoga.Png
@@ -31,7 +32,17 @@ namespace Dianoga.Png
 
 		public override IOptimizerResult Optimize(MediaFileInfo file)
 		{
-            if (file.FileBinary == null)
+		    return ProcessStream(file.FileBinary);
+		}
+
+	    public override IOptimizerResult Optimize(AttachmentInfo file)
+	    {
+            return ProcessStream(file.AttachmentBinary);
+        }
+
+	    private IOptimizerResult ProcessStream(byte[] imageBytes)
+	    {
+            if (imageBytes == null)
             {
                 return new PngOptimizerResult
                 {
@@ -40,9 +51,8 @@ namespace Dianoga.Png
                     Success = true
                 };
             }
-            IntPtr pngOptimizer = GetOrLoadPngOptimizer();
 
-            byte[] imageBytes = file.FileBinary;
+            IntPtr pngOptimizer = GetOrLoadPngOptimizer();
             byte[] resultBytes = new byte[imageBytes.Length + 400000];
             int resultSize;
 
@@ -53,28 +63,28 @@ namespace Dianoga.Png
             OptimizeBytes optimizeMethod = (OptimizeBytes)Marshal.GetDelegateForFunctionPointer(addressOfOptimize, typeof(OptimizeBytes));
             bool success = optimizeMethod(imageBytes, imageBytes.Length, resultBytes, resultBytes.Length, out resultSize);
 
-		    var result = new PngOptimizerResult
-		    {
-		        Success = success,
-		        SizeBefore = imageBytes.Length,
-		        SizeAfter = resultSize,
-		    };
+            var result = new PngOptimizerResult
+            {
+                Success = success,
+                SizeBefore = imageBytes.Length,
+                SizeAfter = resultSize,
+            };
 
-		    if (result.SizeBefore > result.SizeAfter)
-		        result.OptimizedBytes = resultBytes.Take(resultSize).ToArray();
+            if (result.SizeBefore > result.SizeAfter)
+                result.OptimizedBytes = resultBytes.Take(resultSize).ToArray();
 
-		    if (result.Success) return result;
+            if (result.Success) return result;
 
-		    IntPtr addressOfGetError = NativeMethods.GetProcAddress(pngOptimizer, "PO_GetLastErrorString");
-		    if (addressOfGetError == IntPtr.Zero) throw new Exception("Can't find get last error funtion in PngOptimizerDll.dll!");
+            IntPtr addressOfGetError = NativeMethods.GetProcAddress(pngOptimizer, "PO_GetLastErrorString");
+            if (addressOfGetError == IntPtr.Zero) throw new Exception("Can't find get last error funtion in PngOptimizerDll.dll!");
 
-		    GetLastErrorString errorMethod = (GetLastErrorString)Marshal.GetDelegateForFunctionPointer(addressOfGetError, typeof(GetLastErrorString));
-		    result.ErrorMessage = errorMethod();
+            GetLastErrorString errorMethod = (GetLastErrorString)Marshal.GetDelegateForFunctionPointer(addressOfGetError, typeof(GetLastErrorString));
+            result.ErrorMessage = errorMethod();
 
-		    return result;
+            return result;
         }
 
-		private IntPtr _pngo;
+        private IntPtr _pngo;
 		protected virtual IntPtr GetOrLoadPngOptimizer()
 		{
 			if (_pngo != IntPtr.Zero) return _pngo;

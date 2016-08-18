@@ -7,8 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using System.Reflection;
-using System.Xml;
+using CMS.DocumentEngine;
 
 namespace Dianoga
 {
@@ -44,19 +43,45 @@ namespace Dianoga
             Optimizers = optimizers.ToArray();
         }
 
-        public void MediaFile_Insert_Before(object sender, ObjectEventArgs e)
+        public static void MediaFile_Insert_Before(object sender, ObjectEventArgs e)
         {
+            MediaOptimizer optimizer = new MediaOptimizer();
             if (e.Object != null)
             {
-                var image = (MediaFileInfo)e.Object;
-                image.FileTitle = image.FileName.ToUpper();
-                IOptimizerResult result = null;
-                result = Process(image);
-
-                if (result != null)
+                if (e.Object is MediaFileInfo)
                 {
-                    image.FileBinary = result.OptimizedBytes;
-                    image.FileSize = result.OptimizedBytes.Length;
+                    var image = (MediaFileInfo) e.Object;
+                    if (image != null)
+                    {
+                        image.FileTitle = image.FileName.ToUpper();
+                        IOptimizerResult result = null;
+                        result = optimizer.Process(image);
+
+                        if (result != null)
+                        {
+                            image.FileBinary = result.OptimizedBytes;
+                            image.FileSize = result.OptimizedBytes.Length;
+                        }
+                    }
+                    return;
+                }
+
+                if (e.Object is AttachmentInfo)
+                {
+                    var image = (AttachmentInfo)e.Object;
+                    if (image != null)
+                    {
+                        image.AttachmentTitle = image.AttachmentName.ToUpper();
+                        IOptimizerResult result = null;
+                        result = optimizer.Process(image);
+
+                        if (result != null)
+                        {
+                            image.AttachmentBinary = result.OptimizedBytes;
+                            image.AttachmentSize = result.OptimizedBytes.Length;
+                        }
+                    }
+                    return;
                 }
             }
         }
@@ -75,39 +100,62 @@ namespace Dianoga
             sw.Start();
             var result = optimizer.Optimize(stream);
             sw.Stop();
+            return LogResult(result, stream.FileName, stream.FileExtension, stream.FileImageWidth, stream.FileImageHeight, sw.ElapsedMilliseconds);
+        }
 
+        public virtual IOptimizerResult Process(AttachmentInfo stream)
+        {
+            var optimizer = CreateOptimizer(stream);
+
+            if (optimizer == null) return null;
+
+            var sw = new Stopwatch();
+            sw.Start();
+            var result = optimizer.Optimize(stream);
+            sw.Stop();
+
+            return LogResult(result, stream.AttachmentName, stream.AttachmentExtension, stream.AttachmentImageWidth, stream.AttachmentImageHeight, sw.ElapsedMilliseconds);
+        }
+
+        protected virtual IOptimizerResult LogResult(IOptimizerResult result, string name, string extension, int imageWidth, int imageHeight, long ms)
+        {
             if (result.Success)
             {
                 if (result.SizeAfter < result.SizeBefore)
                     EventLogProvider.LogInformation("Dianoga.Kentico", "IMAGE_OPTIMIZED", String.Format("Dianoga: optimized '{0}{1}' [{2}x{3}] (final size: {4} bytes) - saved {5} bytes / {6:p}. Optimized in {7}ms.",
-                                                    stream.FileName,
-                                                    stream.FileExtension,
-                                                    stream.FileImageWidth,
-                                                    stream.FileImageHeight,
+                                                    name,
+                                                    extension,
+                                                    imageWidth,
+                                                    imageHeight,
                                                     result.SizeAfter,
                                                     result.SizeBefore - result.SizeAfter,
                                                     1 - ((result.SizeAfter / (float)result.SizeBefore)),
-                                                    sw.ElapsedMilliseconds));
+                                                    ms));
                 else
                     EventLogProvider.LogInformation("Dianoga.Kentico", "IMAGE_OPTIMIZED", String.Format("Dianoga: '{0}{1}' already optimized",
-                                                        stream.FileName,
-                                                        stream.FileExtension));
+                                                        name,
+                                                        extension));
 
                 return result;
             }
-            EventLogProvider.LogWarning("Dianoga.Kentico", "IMAGE_OPT_ERR", new Exception(String.Format("Dianoga: unable to optimize {0} because {1}", stream.FileName, result.ErrorMessage)), SiteContext.CurrentSiteID, "Dianoga Error");
-
+            EventLogProvider.LogWarning("Dianoga.Kentico", "IMAGE_OPT_ERR", new Exception(String.Format("Dianoga: unable to optimize {0} because {1}", name, result.ErrorMessage)), SiteContext.CurrentSiteID, "Dianoga Error");
             return null;
-        }
 
-        public virtual bool CanOptimize(MediaFileInfo stream)
-        {
-            return CreateOptimizer(stream) != null;
         }
 
         protected virtual IImageOptimizer CreateOptimizer(MediaFileInfo stream)
         {
             return Optimizers.FirstOrDefault(optimizer => optimizer.CanOptimize(stream));
+        }
+
+        protected virtual IImageOptimizer CreateOptimizer(AttachmentInfo stream)
+        {
+            return Optimizers.FirstOrDefault(optimizer => optimizer.CanOptimize(stream));
+        }
+
+        public virtual bool CanOptimize(MediaFileInfo stream)
+        {
+            return CreateOptimizer(stream) != null;
         }
     }
 }
