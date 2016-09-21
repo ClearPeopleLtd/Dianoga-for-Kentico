@@ -57,7 +57,7 @@ namespace Dianoga
                         IOptimizerResult result = null;
                         result = optimizer.Process(image);
 
-                        if (result != null)
+                        if (result != null && result.OptimizedBytes != null && result.OptimizedBytes.Length > 0)
                         {
                             image.FileBinary = result.OptimizedBytes;
                             image.FileSize = result.OptimizedBytes.Length;
@@ -75,7 +75,7 @@ namespace Dianoga
                         IOptimizerResult result = null;
                         result = optimizer.Process(image);
 
-                        if (result != null)
+                        if (result != null && result.OptimizedBytes != null && result.OptimizedBytes.Length > 0)
                         {
                             image.AttachmentBinary = result.OptimizedBytes;
                             image.AttachmentSize = result.OptimizedBytes.Length;
