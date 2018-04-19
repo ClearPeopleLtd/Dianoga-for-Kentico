@@ -1,15 +1,18 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.24720.0
+# Visual Studio 15
+VisualStudioVersion = 15.0.27428.2037
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dianoga_9", "src\Dianoga\Dianoga_9.csproj", "{FD53D6C4-00CC-4CD0-8B18-98D0DD97C289}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dianoga_8", "src\Dianoga\Dianoga_8.csproj", "{54E9BB9B-5503-459E-A935-A83284B8DE24}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dianoga_10", "src\Dianoga\Dianoga_10.csproj", "{540F9614-D6A0-4CAE-8F6A-E84C23336785}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
+		Kentico10|Any CPU = Kentico10|Any CPU
 		Kentico8|Any CPU = Kentico8|Any CPU
 		Kentico9|Any CPU = Kentico9|Any CPU
 		Release|Any CPU = Release|Any CPU
@@ -17,6 +20,8 @@ Global
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{FD53D6C4-00CC-4CD0-8B18-98D0DD97C289}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{FD53D6C4-00CC-4CD0-8B18-98D0DD97C289}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FD53D6C4-00CC-4CD0-8B18-98D0DD97C289}.Kentico10|Any CPU.ActiveCfg = Kentico9|Any CPU
+		{FD53D6C4-00CC-4CD0-8B18-98D0DD97C289}.Kentico10|Any CPU.Build.0 = Kentico9|Any CPU
 		{FD53D6C4-00CC-4CD0-8B18-98D0DD97C289}.Kentico8|Any CPU.ActiveCfg = Kentico8|Any CPU
 		{FD53D6C4-00CC-4CD0-8B18-98D0DD97C289}.Kentico9|Any CPU.ActiveCfg = Kentico9|Any CPU
 		{FD53D6C4-00CC-4CD0-8B18-98D0DD97C289}.Kentico9|Any CPU.Build.0 = Kentico9|Any CPU
@@ -24,13 +29,28 @@ Global
 		{FD53D6C4-00CC-4CD0-8B18-98D0DD97C289}.Release|Any CPU.Build.0 = Release|Any CPU
 		{54E9BB9B-5503-459E-A935-A83284B8DE24}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{54E9BB9B-5503-459E-A935-A83284B8DE24}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{54E9BB9B-5503-459E-A935-A83284B8DE24}.Kentico10|Any CPU.ActiveCfg = Kentico9|Any CPU
+		{54E9BB9B-5503-459E-A935-A83284B8DE24}.Kentico10|Any CPU.Build.0 = Kentico9|Any CPU
 		{54E9BB9B-5503-459E-A935-A83284B8DE24}.Kentico8|Any CPU.ActiveCfg = Kentico8|Any CPU
 		{54E9BB9B-5503-459E-A935-A83284B8DE24}.Kentico8|Any CPU.Build.0 = Kentico8|Any CPU
 		{54E9BB9B-5503-459E-A935-A83284B8DE24}.Kentico9|Any CPU.ActiveCfg = Kentico9|Any CPU
 		{54E9BB9B-5503-459E-A935-A83284B8DE24}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{54E9BB9B-5503-459E-A935-A83284B8DE24}.Release|Any CPU.Build.0 = Release|Any CPU
+		{540F9614-D6A0-4CAE-8F6A-E84C23336785}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{540F9614-D6A0-4CAE-8F6A-E84C23336785}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{540F9614-D6A0-4CAE-8F6A-E84C23336785}.Kentico10|Any CPU.ActiveCfg = Kentico10|Any CPU
+		{540F9614-D6A0-4CAE-8F6A-E84C23336785}.Kentico10|Any CPU.Build.0 = Kentico10|Any CPU
+		{540F9614-D6A0-4CAE-8F6A-E84C23336785}.Kentico8|Any CPU.ActiveCfg = Kentico10|Any CPU
+		{540F9614-D6A0-4CAE-8F6A-E84C23336785}.Kentico8|Any CPU.Build.0 = Kentico10|Any CPU
+		{540F9614-D6A0-4CAE-8F6A-E84C23336785}.Kentico9|Any CPU.ActiveCfg = Kentico10|Any CPU
+		{540F9614-D6A0-4CAE-8F6A-E84C23336785}.Kentico9|Any CPU.Build.0 = Kentico10|Any CPU
+		{540F9614-D6A0-4CAE-8F6A-E84C23336785}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{540F9614-D6A0-4CAE-8F6A-E84C23336785}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {C4654109-F114-43EF-8A5A-0835F29E8A86}
 	EndGlobalSection
 EndGlobal
