@@ -53,7 +53,6 @@ namespace Dianoga
                     var image = (MediaFileInfo) e.Object;
                     if (image != null)
                     {
-                        image.FileTitle = image.FileName.ToUpper();
                         IOptimizerResult result = null;
                         result = optimizer.Process(image);
 
